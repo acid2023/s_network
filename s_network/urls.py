@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from network.views import login_view, logout_view, register, home, profile_view, users_view, edit_profile, login_is_required
+from network.views import login_view, logout_view, register, home, profile_view, users_view, edit_profile, login_is_required, PostView
 
 
 urlpatterns = [
@@ -30,6 +30,8 @@ urlpatterns = [
     path('profile/<int:user_id>/', profile_view, name='profile'),
     path('users/', users_view, name='users'),
     path('edit_profile/', edit_profile, name='edit_profile'),
+    path('post/', PostView.as_view(), name='create_post'),
+    path('post/<int:post_id>/', PostView.as_view(), name='post_view'),
 
 
 ]
