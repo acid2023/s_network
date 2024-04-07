@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comments</title>
+</head>
+<body>
+    {% if error is not None%}
+        <h1>{{error}}</h1>
+    {% else %}
+        {% if post is not None%}
+            <h1>Comments For Post {{post.title}} </h1>
+        {% elif social_user is not None %}
+            <h1>Comments From User {{social_user.username}} </h1>
+        {% else %}
+            <h1>All Comments</h1>
+        {% endif %}
+
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.content }} - {{ comment.author.username }}</li>
+            {% endfor %}
+        </ul>
+        {% if not no_comment %}
+            <h2>Add a Comment:</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        {% endif %}
+    {% endif %}
+
+</body>
+</html>

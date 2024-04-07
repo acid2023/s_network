@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts</title>
+</head>
+<body>
+    {% if socisal_user is not None%}
+    <h1>Posts from {{social_user.username}}</h1>
+    {% else %}
+    <h1>Posts</h1>
+    {% endif %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'post_view' post.id %}"> {{post.title}}{{ post.user.username }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

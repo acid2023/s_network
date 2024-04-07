@@ -5,39 +5,31 @@
 </head>
 <body>
     {% if post == None %}
-    <h1>Post Not Found</h1>
-    <p>The requested post does not exist.</p>
-        
+        <h1>Post Not Found</h1>
+        <p>The requested post does not exist.</p>
+            
     {% else %}
-    <h1>Post Detail</h1>
-    <h2>Title: {{ post.title }}</h2>
-    <p>Content: {{ post.content }}</p>
-    <p>Author: {{ post.author }}</p>
-    <p>Created at: {{ post.created_at }}</p>
+        <h1>Post Detail</h1>
+        <h2>Title: {{ post.title }}</h2>
+        <p>Content: {{ post.content }}</p>
+        <p>Author: {{ post.author }}</p>
+        <p>Created at: {{ post.created_at }}</p>
 
-    <h2>Comments:</h2>
-<ul>
-    {% for comment in comments %}
-        <li>{{ comment.content }} - {{ comment.author.username }}</li>
-    {% endfor %}
-</ul>
-
-<h2>Add a Comment:</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
-<h3>Attitude:</h3>
-{% for attitude in attitudes %}
-    <p>{% if attitude.like %}Like{% else %}Dislike{% endif %} by {{ attitude.user.username }} at {{ attitude.created_at }}</p>
-{% endfor %}
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" name="like">Like</button>
-    <button type="submit" name="dislike">Dislike</button>
-</form>
+        <h3>Attitude:</h3>
+        {% for attitude in attitudes %}
+            <p>{% if attitude.like %}Like{% else %}Dislike{% endif %} by {{ attitude.user.username }} at {{ attitude.created_at }}</p>
+        {% endfor %}
+           
+        {% if logged_status %}
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="like">Like</button>
+                <button type="submit" name="dislike">Dislike</button>
+            </form>
+        {% endif %}
     {% endif %}
+
+<a href="{% url 'comments' post.id %}"> comments for this post</a>
 
 
 </body>
