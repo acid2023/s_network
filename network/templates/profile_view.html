@@ -13,6 +13,9 @@
         <img src="{{ social_user.avatar.url }}" alt="Avatar">
         {% endif %}
     {% endif %}
+    <a href="{% url 'view_posts' social_user.id %}"> Posts from {{social_user}} </a>
+    
+    <a href="{% url 'user_comments' social_user.id %}"> Comments from {{social_user}} </a>
 </body>
 </html>
 
